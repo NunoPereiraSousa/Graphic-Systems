@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Geometria Analítica - Transformações</title>
+    <script type="text/javascript" src="Ex2.js"></script>
+    <style>
+        canvas {
+            padding: 0;
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+
+    <table style="width:200" align="center" border="2">
+        <tr>
+            <th colspan="2">DADOS DE ENTRADA (pontos)</th>
+        </tr>
+        <tr>
+            <td>
+                Px: <input id="px" type="number" step="any" />
+            </td>
+            <td>
+                Py: <input id="py" type="number" step="any" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="background-color:blue" align="center">
+                <br>
+                <input align="center" type="button" value="INSERIR" onclick="insere()" />
+                <input type="button" value="DESENHAR" onclick="desenha()" />
+                <br><br>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table align="center">
+        <tr>
+            <td>
+                <table align="center" border="2">
+                    <tr>
+                        <th>DESLOCAMENTO (em píxeis)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dx: <input id="dx" type="number" value="0" step="any" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dy: <input id="dy" type="number" value="0" step="any" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="background-color:green" align="center">
+                            <br>
+                            <input type="button" value="DESLOCAR" onclick="desloca()" />
+                            <br><br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table align="center" border="2">
+                    <tr>
+                        <th>ESCALONAMENTO (em píxeis)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sx: <input id="sx" type="number" value="0" step="any" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sy: <input id="sy" type="number" value="0" step="any" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="background-color:green" align="center">
+                            <br>
+                            <input type="button" value="ESCALONAR" onclick="escala()" />
+                            <br><br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table align="center" border="2">
+                    <tr>
+                        <th>ROTAÇÃO (em graus)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            &Theta;: <input id="theta" type="number" value="0" step="any" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="background-color:green" align="center">
+                            <br>
+                            <input type="button" value="RODAR" onclick="roda()" />
+                            <br><br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <canvas id="myCanvas" width="400" height="400" style="border:solid 1px black"></canvas>
+</body>
+
+</html>
