@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Geometria Analítica</title>
+	<script type="text/javascript" src="Ex1.js"></script>
+	<style>
+		canvas {
+			padding: 0;
+			margin: auto;
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+
+	<br>
+
+	<table style="width:200" align="center" border="2">
+		<tr>
+			<th colspan="2">DADOS DE ENTRADA (P1, P2 E N)</th>
+		</tr>
+		<tr>
+			<td>
+				P1x: <input id="p1x" type="number" value="100" step="any" />
+			</td>
+			<td>
+				P1y: <input id="p1y" type="number" value="100" step="any" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				P2x: <input id="p2x" type="number" value="300" step="any" />
+			</td>
+			<td>
+				P2y: <input id="p2y" type="number" value="300" step="any" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">N: <input id="n" type="number" value="3" step="1" /></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="background-color:green" align="center">
+				<br>
+				<input align="center" type="button" value="CALCULAR" onclick="calcula()" />
+				<input type="button" value="LIMPAR" onclick="clean()" />
+				<br><br>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+
+	<table id="res" style="width:200" align="center" border="2">
+		<tr>
+			<th colspan="2">RESULTADOS</th>
+		</tr>
+		<tr>
+			<td>Ponto médio</td>
+			<td id="pontomedio"></td>
+		</tr>
+		<tr>
+			<td>Distância</td>
+			<td id="dist"></td>
+		</tr>
+	</table>
+
+	<br>
+
+	<canvas id="myCanvas" width="400" height="400" style="border:solid 1px black"></canvas>
+</body>
+
+</html>
