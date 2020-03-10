@@ -24,7 +24,7 @@ window.onload = function init() {
 let N
 let numPoints = []
 
-function polygon4() {
+function polygon5() {
 	const vertices = [];
 	N = parseFloat(document.querySelector("#vertexNumber").value);
 	let center = {
@@ -56,5 +56,5 @@ function render() {
 	gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
 	gl.enableVertexAttribArray(vPosition);
 
-	gl.drawArrays(gl.TRIANGLES, 0, N);
+	gl.drawArrays(gl.TRIANGLE_FAN, 0, N);
 }
