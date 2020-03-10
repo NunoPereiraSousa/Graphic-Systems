@@ -24,7 +24,7 @@
 	<script type="text/javascript" src="Common/webgl-utils.js"></script>
 	<script type="text/javascript" src="Common/MV.js"></script>
 	<script type="text/javascript" src="Common/initShaders.js"></script>
-	<script type="text/javascript" src="Ex01.js"></script>
+	<script type="text/javascript" src="../Ex01/Ex01.js"></script>
 </head>
 
 <body>
@@ -32,25 +32,23 @@
 		Oops... Browser does not support HTML 5 element Canvas
 	</canvas>
 	<br>
-	<form id="form">
-		<label for="xCenter">X Center</label>
-		<input type="number" id="xCenter">
-		<br>
-		<br>
-		<label for="yCenter">Y Center</label>
-		<input type="number" id="yCenter">
-		<br>
-		<br>
-		<label for="radius">Radius</label>
-		<input type="number" id="radius">
-		<br>
-		<br>
-		<label for="vertexNumber">Vertex Number</label>
-		<input type="number" id="vertexNumber">
-		<br>
-		<br>
-		<button type="submit" value="Submit">Draw</button>
-	</form>
+	<label for="xCenter">X Center</label>
+	<input type="number" id="xCenter">
+	<br>
+	<br>
+	<label for="yCenter">Y Center</label>
+	<input type="number" id="yCenter">
+	<br>
+	<br>
+	<label for="radius">Radius</label>
+	<input type="number" id="radius">
+	<br>
+	<br>
+	<label for="vertexNumber">Vertex Number</label>
+	<input type="number" id="vertexNumber">
+	<br>
+	<br>
+	<button onclick="drawPolygon()">Draw</button>
 </body>
 
 </html>

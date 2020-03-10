@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>WelGL Exercises</title>
+	<script id="vertex-shader" type="x-shader/x-vertex">
+		attribute	vec4	vPosition;
+
+		void main()
+		{
+			gl_Position=vPosition;
+		}
+	</script>
+	<script id="fragment-shader" type="x-shader/x-fragment">
+		precision mediump float;
+
+		void main()
+		{
+			gl_FragColor=vec4(0.0, 0.0, 1.0, 1.0);
+		}
+	</script>
+	<script id="fragment-shader-red" type="x-shader/x-fragment">
+		precision mediump float;
+
+		void main()
+		{
+			gl_FragColor=vec4(1.0, 0.0, 0.0, 1.0);
+		}
+	</script>
+
+	<script type="text/javascript" src="Common/webgl-utils.js"></script>
+	<script type="text/javascript" src="Common/MV.js"></script>
+	<script type="text/javascript" src="Common/initShaders.js"></script>
+	<script type="text/javascript" src="../Ex02/Ex02.js"></script>
+</head>
+
+<body>
+	<canvas id="gl-canvas" width="512" height="512" style="border:2px solid orange;">
+		Oops... Browser does not support HTML 5 element Canvas
+	</canvas>
+	<br>
+	<label for="xCenter">X Center</label>
+	<input type="number" id="xCenter">
+	<br>
+	<br>
+	<label for="yCenter">Y Center</label>
+	<input type="number" id="yCenter">
+	<br>
+	<br>
+	<label for="radius">Radius</label>
+	<input type="number" id="radius">
+	<br>
+	<br>
+	<label for="vertexNumber">Vertex Number</label>
+	<input type="number" id="vertexNumber">
+	<br>
+	<br>
+	<button onclick="polygon2()">Draw</button>
+</body>
+
+</html>

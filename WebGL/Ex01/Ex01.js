@@ -7,7 +7,9 @@ window.onload = function init() {
 
 	// JavaScript utilities for common WebGL tasks (checks for success or failure)
 	gl = WebGLUtils.setupWebGL(canvas);
-	if (!gl) { alert("WebGL not available"); }
+	if (!gl) {
+		alert("WebGL not available");
+	}
 
 	// Sets WebGL viewport (same size as Canvas element)
 	gl.viewport(0, 0, canvas.width, canvas.height);
@@ -28,31 +30,30 @@ window.onload = function init() {
 	gl.enableVertexAttribArray(vPosition);
 
 	// Object rendering
-	let vertices = [];
-
-	document.querySelector("#form").addEventListener("submit", e => {
-		let N = document.querySelector("#vertexNumber").value;
-		let xCenter = document.querySelector("#xCenter").value;
-		let yCenter = document.querySelector("#yCenter").value;
-		let radius = document.querySelector("#radius").value;
-		let angle = 0;
-		for (let i = 0; i < N; i++) {
-			angle += Math.PI * 2 / N;
-			let x = xCenter + radius * Math.cos(angle);
-			let y = yCenter + radius * Math.sin(angle);
-			vertices.push(x);
-			vertices.push(y);
-		}
-		gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
-		gl.drawArrays(gl.TRIANGLE_FAN, 0, N);
-
-		e.preventDefault();
-	})
-
 	render();
 };
+let N
+
+function drawPolygon() {
+	const vertices = [];
+	N = parseFloat(document.querySelector("#vertexNumber").value);
+	let center = {
+		x: parseFloat(document.querySelector("#xCenter").value),
+		y: parseFloat(document.querySelector("#yCenter").value)
+	}
+	let radius = parseFloat(document.querySelector("#radius").value);
+	for (let i = 0; i < N; i++) {
+		let x = center.x + radius * Math.cos((Math.PI * 2 / N) * i);
+		let y = center.y + radius * Math.sin((Math.PI * 2 / N) * i);
+		vertices.push(x, y);
+	}
+	gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
+	render();
+}
 
 // Draw the scene
 function render() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
+
+	gl.drawArrays(gl.TRIANGLE_FAN, 0, N);
 }
