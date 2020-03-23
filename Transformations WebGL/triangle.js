@@ -90,7 +90,7 @@ function updateModelView() {
 			gl.uniformMatrix4fv(modelView, false, flatten(M));
 			break;
 		case "translation":
-			M = translate(pos, pos, pos)
+			M = translate(pos, 0, 0)
 			pos += posInc
 			if (pos >= 0.5 || pos <= -0.5) {
 				posInc = -posInc
