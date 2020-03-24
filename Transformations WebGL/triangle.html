@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
-	<title>Triangle</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<title>Triangle Transformations</title>
 	<script id="vertex-shader" type="x-shader/x-vertex">
 		attribute	vec4	vPosition;
 		attribute	vec4	vColor;
@@ -28,17 +31,48 @@
 	<script type="text/javascript" src="Common/initShaders.js"></script>
 	<script type="text/javascript" src="Common/MV.js"></script>
 	<script type="text/javascript" src="triangle.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+	</script>
 </head>
-<body>
 
-<div>Example of a triangle, with one color per vertex</div>
-<canvas id="gl-canvas" width="512" height="512">
-	Oops... The browser does not support HTML5 Canvas element
-</canvas>
-<p>Key s - Scale</p>
-<p>Key r - Rotation</p>
-<p>Key t - Translation</p>
-<p>Key 1 - Rotation + translation</p>
-<p>Key 2 - Translation + rotation</p>
+<body>
+	<nav class="navbar navbar-expand-lg mb-4 navbar-dark bg-dark">
+		<a class="navbar-brand mt-2 mb-2 mx-auto" href="#">Triangle Transformations</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+
+	<div class="container">
+		<div class="row" style="padding: 1.5em 1em;">
+			<div class="col-lg-6 col-12">
+				<canvas id="gl-canvas" width="512" height="512">
+					Oops... The browser does not support HTML5 Canvas element
+				</canvas>
+			</div>
+			<div class="col-lg-6 col-12 text-left">
+				<h5 class="mb-4">Rules: </h5>
+				<p class="lead">Key s - Scale</p>
+				<p class="lead">Key r - Rotation</p>
+				<p class="lead">Key t - Translation</p>
+				<p class="lead">Key 1 - Rotation + translation</p>
+				<p class="lead">Key 2 - Translation + rotation</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-center">
+				<p class="lead" style="font-weight: 500">By: Nuno Pereira Sousa, 9180579</p>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>

@@ -6,8 +6,6 @@ let scaleN = 0 //* Variable for the scale "boundaries"
 let scaleInc = 0.01 //* Variable for the scale variations
 let pos = 0 //* Variable for the translation "boundaries"
 let posInc = 0.01 //* Variable for the position variations
-let canRotate = true //* Boolean variable to allows rotation first
-let canTranslate = true //* Boolean variable to allows translation first
 
 window.onload = function init() {
 
@@ -98,31 +96,13 @@ function updateModelView() {
 			gl.uniformMatrix4fv(modelView, false, flatten(M));
 			break;
 		case "rotate&translate":
-			if (canRotate = true && angle <= 360) {
-				M = rotate(angle, 1, 1, 1)
-				angle += 1
-				canRotate = false
-			} else {
-				M = translate(pos, 0, 0)
-				pos += posInc
-				if (pos >= 0.5 || pos <= -0.5) {
-					posInc = -posInc
-				}
-			}
+			M = mult(rotate(angle, 0, 0, 1), translate(0.5, 0, 0))
+			angle += 1
 			gl.uniformMatrix4fv(modelView, false, flatten(M));
 			break;
 		case "translate&rotate":
-			if (canTranslate == true) {
-				M = translate(pos, 0, 0)
-				pos += posInc
-				if (pos >= 0.5 || pos <= -0.5) {
-					posInc = -posInc
-					canTranslate = false
-				}
-			} else {
-				M = rotate(angle, 1, 1, 1)
-				angle += 1
-			}
+			M = mult(translate(0.5, 0, 0), rotate(angle, 0, 0, 1))
+			angle += 1
 			gl.uniformMatrix4fv(modelView, false, flatten(M));
 			break;
 		default:
@@ -144,13 +124,11 @@ window.addEventListener("keydown", event => {
 			break;
 		case "1":
 			angle = 0
-			canRotate = true
 			transformation = "rotate&translate"
 			break;
 		case "2":
-			angle = 0
-			canTranslate = true
 			transformation = "translate&rotate"
+			angle = 0
 			break;
 		default:
 			break;
