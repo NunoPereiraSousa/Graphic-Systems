@@ -147,13 +147,18 @@ window.onload = function init() {
 //SHOULDER state variables
 let shoulderXrot = 0;
 let shoulderZrot = 0;
-
+let armXrot = 0;
+let armZrot = 0;
+let wireframeType = 1;
 
 function render() {
     gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
 
-    let type = gl.LINE_LOOP; //HINT for 2.c)
+    // c) 
+    let type = gl.LINE_LOOP;
 
+    wireframeType == 1 ? type = gl.LINE_LOOP : type = gl.TRIANGLES;
+    // END c) 
 
     //Set up projection transformation
     const ratio = gl.viewportWidth / gl.viewportHeight;
@@ -177,14 +182,15 @@ function render() {
      * UPPER ARM
      *************************/
     //place the UPPER ARM in the (does not change the Z-rotation axis - TRY to comment this)
+    // a) mv = mult(mv, translate(0, 0.0, 0.0));
+
     mv = mult(mv, translate(-1.0, 0.0, 0.0));
+
     //Shoulder rotation (X axis)
     mv = mult(mv, rotate(shoulderXrot, [1, 0, 0]));
     //Shoulder rotation (Z axis) - notice the rotation axis
     mv = mult(mv, rotate(shoulderZrot, [0, 0, 1]));
     //translation responsible to change the rotation axis - 2º TRY to remove this transformation. What happens?
-    mv = mult(mv, translate(1.0, 0.0, 0.0));
-
 
     //scale the cube, to draw a parallelepiped - 1º TRY to scale BEFORE the two rotations above. What happens?
     mv = mult(mv, scalem(2.0, 0.5, 1.0));
@@ -195,6 +201,32 @@ function render() {
     //draw the upper arm
     gl.drawArrays(type, 0, 36);
 
+    //Restore mv to initial state (MODELVIEW transformation with only the view transformation - see line 150)
+    mv = matStack.pop();
+
+    matStack.push(mv);
+    //place the UPPER ARM in the (does not change the Z-rotation axis - TRY to comment this)
+    // a) mv = mult(mv, translate(0, 0.0, 0.0));
+
+    // mv = mult(mv, translate(0.0, 0.0, 0.0));
+    mv = mult(mv, translate(-1.0, 0.0, 0.0));
+
+
+    //Shoulder rotation (X axis)
+    mv = mult(mv, rotate(armXrot, [1, 0, 0]));
+    //Shoulder rotation (Z axis) - notice the rotation axis
+    mv = mult(mv, rotate(armZrot, [0, 0, 1]));
+    //translation responsible to change the rotation axis - 2º TRY to remove this transformation. What happens?
+    mv = mult(mv, translate(2.0, 0.0, 0.0));
+
+    //scale the cube, to draw a parallelepiped - 1º TRY to scale BEFORE the two rotations above. What happens?
+    mv = mult(mv, scalem(2.0, 0.5, 1.0));
+
+    //send MODELVIEW transformation matrix to vertex shader
+    gl.uniformMatrix4fv(mvLoc, gl.FALSE, flatten(mv));
+
+    //draw the upper arm
+    gl.drawArrays(type, 0, 36);
 
     //Restore mv to initial state (MODELVIEW transformation with only the view transformation - see line 150)
     mv = matStack.pop();
@@ -220,21 +252,48 @@ document.onkeydown = function handleKeyDown(e) {
     //key R - X-axis rotation
     if (key == "r") { //unshifted key 
         shoulderXrot++;
+        armXrot++;
     }
     if (key == "R") { //shifted key 
         shoulderXrot--;
+        armXrot--;
     }
     //key S - Z-axis rotation
     if (key == "s") {
-        if (shoulderZrot < 90)
+        if (shoulderZrot < 90) {
             shoulderZrot++;
-        else
+            armZrot++;
+        } else {
             shoulderZrot = 90;
+            armZrot = 90;
+        }
     }
     if (key == "S") {
-        if (shoulderZrot > -90)
+        if (shoulderZrot > -90) {
             shoulderZrot--;
-        else
+            armZrot--;
+        } else {
             shoulderZrot = -90;
+            armZrot = -90;
+        }
     }
+    // c) 
+    if (key == "t") {
+        wireframeType == 1 ? wireframeType = 2 : wireframeType = 1
+    }
+    // END c) 
+    // d)
+    if (key == "e") {
+        if (armXrot <= 145)
+            armZrot++;
+        else
+            armZrot = 145;
+    }
+    if (key == "E") {
+        if (armZrot >= -145)
+            armZrot--;
+        else
+            armZrot = 0;
+    }
+    // END d) 
 }
