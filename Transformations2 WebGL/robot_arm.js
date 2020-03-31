@@ -150,6 +150,7 @@ let shoulderZrot = 0;
 let armXrot = 0;
 let armZrot = 0;
 let wireframeType = 1;
+let buttonPress = false; // Boolean Variable that helps with the e key event
 
 function render() {
     gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
@@ -178,60 +179,48 @@ function render() {
     //Save VIEW transform
     matStack.push(mv); //mv with initial state (see line 150)
 
-    /*************************
-     * UPPER ARM
-     *************************/
-    //place the UPPER ARM in the (does not change the Z-rotation axis - TRY to comment this)
+    /* FIRST ARM */
+
     // a) mv = mult(mv, translate(0, 0.0, 0.0));
 
     mv = mult(mv, translate(-1.0, 0.0, 0.0));
 
-    //Shoulder rotation (X axis)
     mv = mult(mv, rotate(shoulderXrot, [1, 0, 0]));
-    //Shoulder rotation (Z axis) - notice the rotation axis
     mv = mult(mv, rotate(shoulderZrot, [0, 0, 1]));
-    //translation responsible to change the rotation axis - 2º TRY to remove this transformation. What happens?
 
-    //scale the cube, to draw a parallelepiped - 1º TRY to scale BEFORE the two rotations above. What happens?
     mv = mult(mv, scalem(2.0, 0.5, 1.0));
 
-    //send MODELVIEW transformation matrix to vertex shader
     gl.uniformMatrix4fv(mvLoc, gl.FALSE, flatten(mv));
 
-    //draw the upper arm
     gl.drawArrays(type, 0, 36);
 
-    //Restore mv to initial state (MODELVIEW transformation with only the view transformation - see line 150)
     mv = matStack.pop();
+
+    /* END FIRST ARM */
+
+    /* SECOND ARM */
 
     matStack.push(mv);
-    //place the UPPER ARM in the (does not change the Z-rotation axis - TRY to comment this)
     // a) mv = mult(mv, translate(0, 0.0, 0.0));
 
-    // mv = mult(mv, translate(0.0, 0.0, 0.0));
-    mv = mult(mv, translate(-1.0, 0.0, 0.0));
+    buttonPress == false ? mv = mult(mv, translate(-1, 0.0, 0.0)) : buttonPress
 
-
-    //Shoulder rotation (X axis)
     mv = mult(mv, rotate(armXrot, [1, 0, 0]));
-    //Shoulder rotation (Z axis) - notice the rotation axis
     mv = mult(mv, rotate(armZrot, [0, 0, 1]));
-    //translation responsible to change the rotation axis - 2º TRY to remove this transformation. What happens?
-    mv = mult(mv, translate(2.0, 0.0, 0.0));
 
-    //scale the cube, to draw a parallelepiped - 1º TRY to scale BEFORE the two rotations above. What happens?
+    buttonPress == false ? mv = mult(mv, translate(2.0, 0.0, 0.0)) :
+        mv = mult(mv, translate(1, 0.0, 0.0));
+
     mv = mult(mv, scalem(2.0, 0.5, 1.0));
 
-    //send MODELVIEW transformation matrix to vertex shader
     gl.uniformMatrix4fv(mvLoc, gl.FALSE, flatten(mv));
 
-    //draw the upper arm
     gl.drawArrays(type, 0, 36);
 
-    //Restore mv to initial state (MODELVIEW transformation with only the view transformation - see line 150)
     mv = matStack.pop();
 
-    //NEXT FRAME
+    /* END SECOND ARM */
+
     requestAnimationFrame(render);
 }
 
@@ -241,20 +230,16 @@ function render() {
 // Keyboard Event Functions
 //----------------------------------------------------------------------------
 document.onkeydown = function handleKeyDown(e) {
-
-    //Get key character
     const key = e.key;
-    //console.log(key)
 
-    /*************************
-     * SHOULDER UPDATES
-     *************************/
+    /* KEY EVENTS */
+
     //key R - X-axis rotation
-    if (key == "r") { //unshifted key 
+    if (key == "r") {
         shoulderXrot++;
         armXrot++;
     }
-    if (key == "R") { //shifted key 
+    if (key == "R") {
         shoulderXrot--;
         armXrot--;
     }
@@ -283,17 +268,14 @@ document.onkeydown = function handleKeyDown(e) {
     }
     // END c) 
     // d)
-    if (key == "e") {
-        if (armXrot <= 145)
-            armZrot++;
-        else
-            armZrot = 145;
+    if (key == "e" && armZrot <= 145) {
+        armZrot++;
+        buttonPress = true
     }
-    if (key == "E") {
-        if (armZrot >= -145)
-            armZrot--;
-        else
-            armZrot = 0;
+    if (key == "E" && armZrot >= -145) {
+        armZrot--;
+        buttonPress = true
     }
-    // END d) 
 }
+
+// END d) 
