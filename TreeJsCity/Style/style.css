@@ -1,0 +1,124 @@
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: #fefefa;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #979797;
+  border-radius: 0.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #3d3d3d;
+  font-family: "Merriweather";
+  color: #fefefa !important;
+  overflow-x: hidden;
+}
+
+body .navbar {
+  width: 100vw;
+  font-weight: 500;
+  letter-spacing: 2px;
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 4px 6px -6px #fefefa;
+  box-shadow: 0 4px 4px -6px #dfdfdf;
+}
+
+body .navbar .navbar-brand {
+  color: #fefefa !important;
+  font-family: "Merriweather";
+}
+
+body .section1 {
+  height: 100vh;
+  width: 100vw;
+  font-family: "Merriweather";
+}
+
+body .section1 h1 {
+  color: #fefefa !important;
+  font-size: 3.8em;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+body .section1 h4 {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+body .section1 h5 {
+  font-weight: 500;
+  color: #d1d1d1;
+  letter-spacing: 4px;
+  line-height: 30px;
+}
+
+body .section1 hr {
+  width: 50%;
+  background: #dedede;
+}
+
+body .section1 #scroll {
+  bottom: 5%;
+  -webkit-animation: move 1s infinite alternate ease-in-out;
+          animation: move 1s infinite alternate ease-in-out;
+}
+
+body .section1 #arrowDown {
+  display: none;
+  position: fixed;
+  bottom: 12%;
+  left: 93%;
+  z-index: 999;
+}
+
+body #canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+footer {
+  width: 100%;
+  height: auto;
+  background: #3d3d3d;
+  -webkit-box-shadow: 0 -4px 2px -5px #fefefa;
+          box-shadow: 0 -4px 2px -5px #fefefa;
+}
+
+footer p {
+  font-size: 1.05em;
+  font-weight: 500;
+}
+
+@-webkit-keyframes move {
+  from {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+}
+
+@keyframes move {
+  from {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+}
+/*# sourceMappingURL=style.css.map */
