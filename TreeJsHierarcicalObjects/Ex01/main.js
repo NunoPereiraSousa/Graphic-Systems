@@ -4,7 +4,7 @@ let cube, spherePivot, sphere;
 
 let movement = -1; //no rotations
 
-function init() {
+window.onload = function init() {
     const canvas = document.getElementById("webglcanvas");
 
     /*********************
