@@ -1,31 +1,135 @@
-<html>
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Hierarchical objects in Three.js</title>
-    <script src="../libs/three.min.js"></script>
-    <script type="text/javascript" src="../libs/OrbitControls.js"></script>
-    <script src="main.js"></script>
+    <title>Exercise 1</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Style/style.css">
 </head>
 
 <body>
-    <div id="container">
-        <div id="title">
-            Three.js Scene Graph/Transform Hierarchy
+    <div id="home">
+        <nav class="navbar">
+            <a class="navbar-brand mx-auto" href="#">NPS</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="container section1 d-flex justify-content-center align-items-center">
+            <div class="row position-absolute text-center mx-auto">
+                <div class="col-12 mx-auto">
+                    <div class="mainText">
+                        <h1 class="text-uppercase" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600"
+                            data-aos-once="true" data-aos-easing="ease">
+                            &lt; Nuno Pereira <br class="d-lg-none" />Sousa /&gt;
+                        </h1>
+                        <h4 class="pt-4 pb-3" data-aos="fade-up" data-aos-duration="800" data-aos-delay="900"
+                            data-aos-once="true" data-aos-easing="ease">
+                            Web Developer &minus; UI & UX Designer
+                        </h4>
+                        <hr data-aos="fade-up" data-aos-duration="800" data-aos-delay="1200" data-aos-once="true"
+                            data-aos-easing="ease" />
+                        <h5 class="pt-3 text-uppercase asd" data-aos="fade-up" data-aos-duration="800"
+                            data-aos-delay="1500" data-aos-once="true" data-aos-easing="ease">
+                            "If you want to look good in front of thousands,<br />
+                            you have to outwork thousands in front of nobody"
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="position-absolute" id="scroll" data-aos-anchor=".pt-3" data-aos="fade-up"
+                data-aos-duration="800" data-aos-delay="2000" data-aos-once="true" data-aos-easing="ease">
+                <a href="#canvas">
+                    <i class="fas fa-chevron-down" style="color: #fefefa; font-size: 2em"></i>
+                </a>
+            </div>
+            <div>
+                <a href="#home" id="arrowDown">
+                    <i class="fas fa-chevron-up" style="color: #fefefa; font-size: 2em"></i>
+                </a>
+            </div>
         </div>
-        <canvas id="webglcanvas" width=800 height=600 style="float:left;"></canvas>
 
-        <div id="prompt" style="padding-right: 30px;">
-            Select one option:
-            <ul style="list-style-type: none">
-                <li>Key R ( Shift + R): rotate arm around the X axis</li>
-                <li>Key S ( Shift + S): rotate arm around the Z axis between [-90o, 90o]</li>
-                <li>Key E ( Shift + E): rotate elbow around the Z axis between [0o, 145o]</li>
-                <li>Key T: alter the mesh material wireframe between values true and false</li>
-            </ul>
+        <div class="container section2" id="canvas">
+            <div class="row text-left mt-5">
+                <div class="col-12">
+                    <h4 class="">Canvas</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <canvas id="webglcanvas" width="500px" height="400px"></canvas>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Key R ( Shift + R): rotate arm around the X axis</li>
+                        <li class="list-group-item">Key S ( Shift + S): rotate arm around the Z axis between [-90º, 90º]
+                        </li>
+                        <li class="list-group-item">Key E ( Shift + E): rotate elbow around the Z axis between [0º,
+                            145º]</li>
+                        <li class="list-group-item">Key T: alter the mesh material wireframe between values true and
+                            false</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+        <footer class="p-4">
+            <div class="container">
+                <div class="row text-center d-flex align-items-center">
+                    <div class="col-lg-6 col-sm-12">
+                        <a href="https://www.facebook.com/nuno.sousa.9655806" target="_blank">
+                            <i class="fab fa-linkedin-in mr-4" style="font-size: 28px; color: #fefefa;"></i>
+                        </a>
+                        <a href="https://www.behance.net/nunosousa4" target="_blank">
+                            <i class="fab fa-behance mr-4" style="font-size: 28px; color: #fefefa;"></i>
+                        </a>
+                        <a href="https://www.instagram.com/nunopereirasousa/" target="_blank">
+                            <i class="fab fa-instagram mr-4" style="font-size: 28px; color: #fefefa;"></i>
+                        </a>
+                        <a href="https://github.com/NunoPereiraSousa" target="_blank">
+                            <i class="fab fa-github-square" style="font-size: 28px; color: #fefefa;"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <p class="m-0">
+                            &lt;Web Designed and Coded by Nuno &copy; 2020
+                            /&gt;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).scroll(function () {
+            let y = $(this).scrollTop();
+            if (y > 500) {
+                $("#arrowDown").fadeIn();
+            } else {
+                $("#arrowDown").fadeOut();
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="./libs/three.min.js"></script>
+    <script type="text/javascript" src="./libs/OrbitControls.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

@@ -26,7 +26,7 @@ window.onload = function init() {
      * *******************/
     // create a camera, which defines where we're looking at
     camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 1, 4000);
-    camera.position.set(2, 2, 15);
+    camera.position.set(1, 1, 10);
     scene.add(camera);
 
 
