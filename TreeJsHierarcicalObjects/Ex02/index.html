@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hierarchical objects in Three.js</title>
+    <script src="../libs/three.min.js"></script>
+    <script type="text/javascript" src="../libs/OrbitControls.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="title">
+            Three.js Scene Graph/Transform Hierarchy
+        </div>
+        <canvas id="webglcanvas" width=800 height=600 style="float:left;"></canvas>
+
+        <div id="prompt" style="padding-right: 30px;">
+            Select one option:
+            <ul style="list-style-type: none">
+                <li>Key R ( Shift + R): rotate arm around the X axis</li>
+                <li>Key S ( Shift + S): rotate arm around the Z axis between [-90o, 90o]</li>
+                <li>Key E ( Shift + E): rotate elbow around the Z axis between [0o, 145o]</li>
+                <li>Key T: alter the mesh material wireframe between values true and false</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
