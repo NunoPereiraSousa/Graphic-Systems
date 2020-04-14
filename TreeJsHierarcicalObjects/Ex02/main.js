@@ -70,8 +70,8 @@ window.onload = function init() {
      * AXES HELPER
      *************************/
     // show SCENE axes
-    let axes = new THREE.AxesHelper(4);
-    scene.add(axes);
+    // let axes = new THREE.AxesHelper(4);
+    // scene.add(axes);
 
     // Run the run loop
     animate();
@@ -109,12 +109,6 @@ document.onkeydown = function handleKeyDown(e) {
             break;
         case "t":
             material.wireframe == false ? material.wireframe = true : material.wireframe = false
-            break;
-        default:
-            // Reset 
-            shoulder.rotation.x = 0;
-            shoulder.rotation.z = 0;
-            elbow.rotation.z = 0;
             break;
     }
 }
