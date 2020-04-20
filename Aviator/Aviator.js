@@ -21,9 +21,10 @@ window.onload = function init() {
     // and render the scene on each frame
     animate();
 }
-
+let x, y
 window.addEventListener("mousemove", e => {
-    
+    x = ((event.clientX - e.target.getBoundingClientRect().left) / e.currentTarget.width) * 2 - 1;
+    y = -((event.clientY - e.target.getBoundingClientRect().top) / e.currentTarget.height) * 2 + 1;
 })
 
 //INIT THREE JS, SCREEN, SCENE AND CAMERA
@@ -84,7 +85,7 @@ function createSea() {
 
     // push it a little bit at the bottom of the scene
     sea.position.y = -600;
-    
+
     scene.add(sea);
 }
 
@@ -95,7 +96,6 @@ function createSky() {
     sky.position.y = -600;
     createCloud();
     scene.add(sky);
-
 }
 
 function createCloud() {
@@ -114,7 +114,7 @@ function createCloud() {
         cloud = new THREE.Object3D();
         number_cubes = Math.floor(Math.random() * (10 - 4)) + 4;
         cloud.position.set(circle_radius * Math.cos(i * angle), circle_radius * Math.sin(i * angle), (Math.random() * (-400 + 800) - 800))
-        cloud.rotation.z = Math.PI / 2 + (angle * i);        
+        cloud.rotation.z = Math.PI / 2 + (angle * i);
 
         for (let j = 0; j < number_cubes; j++) {
             cube_geometry = new THREE.BoxGeometry(20, 20, 20);
@@ -123,13 +123,13 @@ function createCloud() {
                 wireframe: false
             });
             scale_number = (Math.random() * (2 - 0.1) + 0.1)
-    
+
             cube = new THREE.Mesh(cube_geometry, cube_material);
             cube.rotation.y = Math.random() * (2 * Math.PI - 0) + 0;
             cube.rotation.z = Math.random() * (2 * Math.PI - 0) + 0;
-            cube.position.set(j * 15, Math.floor(Math.random() * 10), Math.floor(Math.random() * 10))            
+            cube.position.set(j * 15, Math.floor(Math.random() * 10), Math.floor(Math.random() * 10))
             cube.scale.set(scale_number, scale_number, scale_number);
-            
+
             cloud.add(cube);
         }
         sky.add(cloud);
@@ -216,7 +216,7 @@ function animate() {
     sea.rotation.z += 0.005;
 
     // rotate the propeller in the x axis
-    propeller.rotation.x += 0.01
+    propeller.rotation.x += 0.1
 
     // render
     renderer.render(scene, camera);
