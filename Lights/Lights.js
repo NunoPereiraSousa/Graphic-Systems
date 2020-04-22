@@ -115,7 +115,7 @@ window.onload = function init() {
     pointLight.visible = false;
     scene.add(pointLight);
 
-    pointLightHelper = new THREE.PointLightHelper(pointLight,50);
+    pointLightHelper = new THREE.PointLightHelper(pointLight, 50);
     pointLightHelper.visible = false;
     scene.add(pointLightHelper);
 
