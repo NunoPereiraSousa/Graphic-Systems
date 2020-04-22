@@ -49,7 +49,7 @@ function createScene() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // configure renderer clear color
-    renderer.setClearColor("#f1deae");
+    renderer.setClearColor("#c4e0ba");
 
     // add the output of the renderer to the DIV with id "world"
     document.getElementById('world').appendChild(renderer.domElement);
@@ -143,13 +143,6 @@ function createSea() {
 
 function moveWaves() {
     let vertices = sea.geometry.vertices;
-    // for (const vertex of vertices) {
-    //     for (const wave of waves) {
-    //         vertex.x = wave.x + Math.cos(wave.angle) * wave.radius;
-    //         vertex.y = wave.y + Math.sin(wave.angle) * wave.radius;
-    //         wave.angle += wave.velocity
-    //     } 
-    // }
     for (let i = 0; i < vertices.length; i++) {
         let wave = waves[i];
         vertices[i].x = wave.x + Math.cos(wave.angle) * wave.radius;
