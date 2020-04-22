@@ -68,7 +68,6 @@ function handleWindowResize() {
 }
 
 function createLights() {
-    //TODO (later - part II)
     hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, 0.9);
     hemisphereLight.visible = true;
     scene.add(hemisphereLight);
@@ -77,7 +76,6 @@ function createLights() {
     directionalLight.position.set(100, 80, 50)
     directionalLight.visible = true;
     directionalLight.target = plane;
-    directionalLight.castShadow = true;
     scene.add(directionalLight);
 
     // directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 100);
@@ -136,8 +134,6 @@ function createSea() {
         })
     }
     sea.position.y = -600;
-    sea.receiveShadow = true;
-
     scene.add(sea);
 }
 
@@ -271,8 +267,6 @@ function createPlane() {
     // SECOND BLADE
     let blade2 = blade.clone();
     blade2.rotation.x = Math.PI / 2;
-    blade2.castShadow = true;
-    blade2.receiveShadow = true;
     // END SECOND BLADE
 
     scene.add(plane);
