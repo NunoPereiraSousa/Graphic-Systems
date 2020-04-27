@@ -85,8 +85,8 @@ function createLights() {
 
     scene.add(directionalLight);
 
-    let helper = new THREE.CameraHelper(directionalLight.shadow.camera);
-    scene.add(helper);
+    // let helper = new THREE.CameraHelper(directionalLight.shadow.camera);
+    // scene.add(helper);
 
     // directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 100);
     // directionalLightHelper.visible = true;
@@ -224,8 +224,6 @@ function createPlane() {
     cockpit_geometry.vertices[5].y -= 4;
     cockpit_geometry.vertices[6].y += 12;
     cockpit_geometry.vertices[7].y += 12;
-    cockpit.castShadow = true;
-    cockpit.receiveShadow = true;
     // END COCKPIT
 
     // ENGINE
@@ -235,8 +233,6 @@ function createPlane() {
     });
     engine = new THREE.Mesh(engine_geometry, engine_material);
     engine.position.set(30, 0, 0);
-    engine.castShadow = true;
-    engine.receiveShadow = true;
     // END ENGINE
 
     // TAIL
@@ -246,8 +242,6 @@ function createPlane() {
     });
     tail = new THREE.Mesh(tail_geometry, tail_material);
     tail.position.set(-38, 24, 0);
-    tail.castShadow = true;
-    tail.receiveShadow = true;
     // END TAIL
 
     // WING
@@ -257,8 +251,6 @@ function createPlane() {
     });
     wing = new THREE.Mesh(wing_geometry, wing_material);
     wing.position.set(-2, 0, 0);
-    wing.castShadow = true;
-    wing.receiveShadow = true;
     // END WING
 
     // PROPELLER
@@ -281,8 +273,6 @@ function createPlane() {
     });
     blade = new THREE.Mesh(blade_geometry, blade_material);
     blade.position.set(10, 0, 0);
-    blade.castShadow = true;
-    blade.receiveShadow = true;
     // END BLADE
 
     // SECOND BLADE
@@ -325,6 +315,17 @@ function animate() {
     // rotate the background (use AxesHelper to verify which axis is the rotation one)
     sky.rotation.z += 0.01;
     sea.rotation.z += 0.005;
+
+    plane.traverse(function (child) {
+        // if child object is a MESH
+        if (child instanceof THREE.Mesh) {
+            // it must cast and receive shadows
+            child.castShadow = true;
+            child.receiveShadow = true;
+            console.log(1);
+
+        }
+    });
 
     // rotate the propeller in the x axis
     propeller.rotation.x += 0.1
