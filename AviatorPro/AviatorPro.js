@@ -107,7 +107,7 @@ function updateLight() {
     if (position <= 1) {
         directionalLight.position.x = curve.getPointAt(position).x
         directionalLight.position.y = curve.getPointAt(position).y
-        position += 0.0002
+        position += 0.0005
     } else {
         position = 0
     }
