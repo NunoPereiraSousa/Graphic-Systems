@@ -28,8 +28,6 @@ matArray.push(new THREE.MeshBasicMaterial({
 let size;
 let positionX, positionY, positionZ;
 let material;
-let incX = 0,
-    incY = 3.1;
 
 window.onload = function init() {
     //scene
