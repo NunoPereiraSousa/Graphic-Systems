@@ -35,9 +35,6 @@ window.onload = function init() {
     //scene
     scene = new THREE.Scene();
 
-    // let axes = new THREE.AxisHelper(200);
-    // scene.add(axes)
-
     //camera
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 10, 200);
     // position and point the camera to the center of the scene

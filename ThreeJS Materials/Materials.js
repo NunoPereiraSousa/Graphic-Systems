@@ -63,8 +63,10 @@ window.onload = function init() {
     function addCube() {
         size = Math.floor(Math.random() * (6 - 3)) + 3;
         let geometry = new THREE.BoxGeometry(size, size, size);
+        const color2 = new THREE.Color(0xffffff);
+        color2.setRGB(Math.random(), Math.random(), Math.random());
         material = new THREE.MeshBasicMaterial({
-            color: 0x00ff00
+            color: color2
         });
         material.flatShading = true;
         let cube = new THREE.Mesh(geometry, material);
@@ -92,7 +94,6 @@ window.onload = function init() {
     scene.add(pointLight);
 
     renderer.render(scene, camera);
-
 }
 
 //----------------------------------------------------------------------------
@@ -161,16 +162,17 @@ document.onkeydown = function handleKeyDown(event) {
             });
             for (let i = 0; i < 100; i++) {
                 let size = Math.floor(Math.random() * (6 - 3)) + 3;
-                let cube2 = new THREE.SceneUtils.createMultiMaterialObject(
+                cube2 = new THREE.SceneUtils.createMultiMaterialObject(
                     new THREE.BoxGeometry(size, size, size),
                     [
                         new THREE.MeshDepthMaterial(),
                         new THREE.MeshBasicMaterial({
-                        color: 0x008000,
-                        wireframe: false,
-                        transparent: true,
-                        blending: THREE.MultiplyBlending
-                    })]
+                            color: 0x008000,
+                            wireframe: false,
+                            transparent: true,
+                            blending: THREE.MultiplyBlending
+                        })
+                    ]
                 );
                 let positionX = Math.floor(Math.random() * (50 + 50)) - 50;
                 let positionY = Math.floor(Math.random() * 11);
@@ -180,19 +182,19 @@ document.onkeydown = function handleKeyDown(event) {
                 cube2.receiveShadow = true;
                 cube2.name = "MultiMaterial";
                 scene.add(cube2)
-                cubes.push(cube2)                
+                cubes.push(cube2)
             }
-            
+
             break;
         default:
-            for (let i = 0; i < scene.children.length; i++) {
-                if (scene.children[i].name === "MultiMaterial") {                                        
-                    scene.remove(scene.children[i]);
+            for (let i = scene.children.length -1; i > 0; i--) {                
+                if (scene.children[i].name == "MultiMaterial") {                    
+                    scene.remove(scene.getObjectByName("MultiMaterial"));
                 }
             }
             // scene.traverse(function (child) {
             //     if (child instanceof THREE.Mesh && child.name === "MultiMaterial") {
-            //         console.log(child instanceof THREE.Mesh);
+            //         console.log(scene.getObjectByName("MultiMaterial"));
             //         scene.remove(child);
             //     }
             // });
@@ -208,3 +210,5 @@ document.onkeydown = function handleKeyDown(event) {
     }
     renderer.render(scene, camera);
 }
+
+let cube2
