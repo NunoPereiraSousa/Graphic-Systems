@@ -192,12 +192,6 @@ document.onkeydown = function handleKeyDown(event) {
                     scene.remove(scene.getObjectByName("MultiMaterial"));
                 }
             }
-            // scene.traverse(function (child) {
-            //     if (child instanceof THREE.Mesh && child.name === "MultiMaterial") {
-            //         console.log(scene.getObjectByName("MultiMaterial"));
-            //         scene.remove(child);
-            //     }
-            // });
             for (let i = 0; i < cubes.length; i++) {
                 const color = new THREE.Color(0xffffff);
                 color.setRGB(Math.random(), Math.random(), Math.random());
