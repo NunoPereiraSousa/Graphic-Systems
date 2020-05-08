@@ -1,6 +1,8 @@
 let clockCanvas;
 let renderer, scene, camera;
 
+let canvas, texture;
+
 window.onload = function init() {
     //scene
     scene = new THREE.Scene();
@@ -22,20 +24,21 @@ window.onload = function init() {
         renderer.render(scene, camera);
     });
 
-    let canvas = document.createElement('canvas');
-
     document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-    let texture = new THREE.Texture(canvas);
-    let material = new THREE.MeshLambertMaterial({
+    canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    clock(canvas)
+
+    texture = new THREE.Texture(clockCanvas);
+    material = new THREE.MeshLambertMaterial({
         map: texture
     });
-
+    
     cube = new THREE.Mesh(
         new THREE.BoxGeometry(10, 10, 10),
-        new THREE.MeshLambertMaterial({
-            color: 0x228B22
-        }));
+        material);
     scene.add(cube);
 
     // Directional Light
@@ -55,7 +58,7 @@ window.onload = function init() {
 function animation() {
     requestAnimationFrame(animation);
 
-
+    texture.needsUpdate = true;
 
     renderer.render(scene, camera);
 }
@@ -68,9 +71,6 @@ function clock(canvas) {
         alert('canvas not supported!');
         return;
     }
-
-    canvas.width = 500;
-    canvas.height = 500;
 
     tick();
 }
@@ -96,7 +96,7 @@ function tick() {
     //0.4916666667 degrees (59 * 1/120) to account for seconds
     var hourAngle = -90 + (s / 120);
 
-    var ctx = clockCanvas.getContext('2d');
+    var ctx = clockCanvas.getContext('2d');    
     ctx.clearRect(0, 0, 500, 500);
     ctx.fillStyle = "#999999";
     ctx.fillRect(0, 0, 500, 500);
