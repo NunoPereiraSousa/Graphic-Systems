@@ -1,7 +1,68 @@
-var clockCanvas;
+let clockCanvas;
+let renderer, scene, camera;
+
+window.onload = function init() {
+    //scene
+    scene = new THREE.Scene();
+
+    //camera
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
+    // position and point the camera to the center of the scene
+    camera.position.set(15, 15, 15);
+    camera.lookAt(0, 0, 0);
+
+    //renderer
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    controls = new THREE.OrbitControls(camera);
+    controls.addEventListener('change', function () {
+        renderer.render(scene, camera);
+    });
+
+    let canvas = document.createElement('canvas');
+
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    let texture = new THREE.Texture(canvas);
+    let material = new THREE.MeshLambertMaterial({
+        map: texture
+    });
+
+    cube = new THREE.Mesh(
+        new THREE.BoxGeometry(10, 10, 10),
+        new THREE.MeshLambertMaterial({
+            color: 0x228B22
+        }));
+    scene.add(cube);
+
+    // Directional Light
+    let directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight.position.set(25, 25, 25);
+    scene.add(directionalLight);
+
+    // Ambient Light
+    let ambientLight = new THREE.AmbientLight(0x333333);
+    scene.add(ambientLight);
+
+    animation()
+
+    renderer.render(scene, camera);
+}
+
+function animation() {
+    requestAnimationFrame(animation);
+
+
+
+    renderer.render(scene, camera);
+}
 
 function clock(canvas) {
     clockCanvas = canvas;
+
     //guarantee canvas is supported
     if (!canvas.getContext) {
         alert('canvas not supported!');
@@ -10,7 +71,7 @@ function clock(canvas) {
 
     canvas.width = 500;
     canvas.height = 500;
-    
+
     tick();
 }
 
