@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cube Camera</title>
+    <script src="libs/three.min.js"></script>
+    <script src="libs/OrbitControls.js"></script>
+
+    <script type="text/javascript">
+        // standard global variables
+        let scene, camera, renderer, controls;
+
+        // custom global variables
+        let mirrorSphere, mirrorSphereCamera;
+        let refractSphere, refractSphereCamera;
+
+        window.onload = function init() {
+            // Create the Three.js renderer
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            //show canvas
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            // SCENE
+            scene = new THREE.Scene();
+
+            // CAMERA
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+            scene.add(camera);
+            camera.position.set(0, 150, 400);
+
+
+            // CONTROLS
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+            // LIGHT
+            let light = new THREE.PointLight(0xffffff);
+            light.position.set(0, 250, 0);
+            scene.add(light);
+
+
+            let textureCube = new THREE.CubeTextureLoader()
+                .setPath('images/dawnmountain-')
+                .load([
+                    'xpos.png',
+                    'xneg.png',
+                    'ypos.png',
+                    'yneg.png',
+                    'zpos.png',
+                    'zneg.png'
+                ]);
+            scene.background = textureCube;
+
+
+            // FLOOR
+            let floorTexture = new THREE.TextureLoader().load('images/checkerboard.jpg');
+            floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+            floorTexture.repeat.set(10, 10);
+            let floorMaterial = new THREE.MeshBasicMaterial({ map: floorTexture, side: THREE.DoubleSide });
+            let floorGeometry = new THREE.PlaneGeometry(200, 200, 10, 10);
+            let floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.position.y = -100;
+            floor.rotation.x = Math.PI / 2;
+            scene.add(floor);
+
+
+
+            // Create cube camera - REFRACTION
+            refractSphereCamera = new THREE.CubeCamera(0.1, 5000, 512);
+            scene.add(refractSphereCamera);
+
+            let refractMaterial = new THREE.MeshBasicMaterial(
+                {   color: 0xccffff, 
+                    // environment mapping 
+                    envMap: refractSphereCamera.renderTarget.texture,refractionRatio: 0.8 });
+            refractMaterial.envMap.mapping = THREE.CubeRefractionMapping;
+
+            let sphereGeom = new THREE.SphereGeometry(50, 32, 32);
+            refractSphere = new THREE.Mesh(sphereGeom, refractMaterial);
+            refractSphere.position.set(-75, 50, 0);
+
+            scene.add(refractSphere);
+
+
+            // Create cube camera - REFLEXION
+            mirrorSphereCamera = new THREE.CubeCamera(0.1, 5000, 512);
+            scene.add(mirrorSphereCamera);
+
+            let mirrorSphereMaterial = new THREE.MeshBasicMaterial(
+                {   color: 0xffccff, 
+                    // environment mapping 
+                    envMap: mirrorSphereCamera.renderTarget.texture });
+            mirrorSphere = new THREE.Mesh(sphereGeom, mirrorSphereMaterial);
+            mirrorSphere.position.set(75, 50, 0);
+            scene.add(mirrorSphere);
+            
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update the render target cube
+            refractSphere.visible = false;
+            refractSphereCamera.position.copy(refractSphere.position);
+            refractSphereCamera.update(renderer, scene);
+            refractSphere.visible = true;
+
+            // Update the render target cube
+            mirrorSphere.visible = false;
+            mirrorSphereCamera.position.copy(mirrorSphere.position);
+            mirrorSphereCamera.update(renderer, scene);
+            mirrorSphere.visible = true;
+
+            // Render the scene
+            renderer.render(scene, camera);
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="canvas-container" style="position: absolute; left:0px; top:0px"></div>
+</body>
+
+</html>
