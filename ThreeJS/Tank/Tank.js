@@ -2,6 +2,7 @@ let renderer, scene, camera;
 
 let directionalLight; // Light
 let plane, tank, base, tower, cannon;
+let cameraChange;
 
 // once everything is loaded, we run our Three.js stuff
 window.onload = function init() {
@@ -21,8 +22,7 @@ window.onload = function init() {
     const aspect = window.innerWidth / window.innerHeight;
     camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
     //set the camera's view transformation
-    // camera.position.set(0, 50, 70);
-    camera.position.set(-20, 5, 20);
+    camera.position.set(0, 50, 70);
     camera.lookAt(0, 0, 0); // lookat
 
     /*********************
@@ -73,8 +73,8 @@ window.onload = function init() {
             map: new THREE.TextureLoader().load("./images/camouflage.jpg")
         })
     );
-    tower.position.set(0, 1, 0)
-    scene.add(tower);
+    tower.position.set(0, 1, -1)
+    base.add(tower);
 
     cannon = new THREE.Mesh(
         new THREE.BoxGeometry(0.4, 0.4, 4),
@@ -83,8 +83,8 @@ window.onload = function init() {
             map: new THREE.TextureLoader().load("./images/camouflage.jpg")
         })
     );
-    cannon.position.set(0, 1, 2.5)
-    scene.add(cannon);
+    cannon.position.set(0, 1, 2)
+    base.add(cannon);
 
     /*****************************
      * LIGHTS 
@@ -114,13 +114,18 @@ window.onload = function init() {
 function animation() {
     requestAnimationFrame(animation);
 
-    let relativeOffset = new THREE.Vector3(0, 5, 20);
-    // updates the offset with the object‘s global transformation matrix
-    let cameraOffset = relativeOffset.applyMatrix4(base.matrixWorld);
-    // updates the camera position with the new offset
-    camera.position.copy(cameraOffset);
-    // camera looks at the object’s position
-    camera.lookAt(base.position);
+    if (cameraChange) {
+        camera.position.set(0, 50, 70);
+        camera.lookAt(0, 0, 0);
+    } else {
+        let relativeOffset = new THREE.Vector3(0, 5, -15);
+        // updates the offset with the object‘s global transformation matrix
+        let cameraOffset = relativeOffset.applyMatrix4(base.matrixWorld);
+        // updates the camera position with the new offset
+        camera.position.copy(cameraOffset);
+        // camera looks at the object’s position
+        camera.lookAt(base.position);
+    }
 
     renderer.render(scene, camera);
 }
@@ -130,18 +135,18 @@ function handleKeyDown(e) {
 
     switch (key) {
         case "w":
-
+            // base.position.x += 0.1 * Math.sin(base.rotation.y);
+            base.position.z += 0.1 * Math.cos(base.rotation.y);            
             break;
         case "s":
-
+            base.position.z -= 0.1 * Math.cos(base.rotation.y); 
             break;
         case "a":
-
+            base.rotation.y += 0.01;
             break;
         case "d":
-
+            base.rotation.y -= 0.01;
             break;
-
             // Rotate tower to the right
         case "z":
             tower.rotation.y += 0.01;
@@ -160,7 +165,7 @@ function handleKeyDown(e) {
             break;
             // Rotate cannon to the left
         case "c":
-            
+            cameraChange = !cameraChange
             break;
         default:
             break;

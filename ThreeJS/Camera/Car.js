@@ -60,23 +60,23 @@ let pos = new THREE.Vector3(0, 0, 0);
 // car angle: by default, the car is facing +Z direction
 // so, add a rotation of PI/2 to make the car facing -Z direction
 let angle = Math.PI;
-
+let rotateR, rotateL
 function render() {
     if (car != undefined) {
         // sets the toycar object with the updated position
         car.position.set(pos.x, pos.y, pos.z);
         // rotates the car by angle radians
-        car.rotation.y = (angle);
+        // car.rotation.y = (angle);
         // camera TO object relative offset
-    let relativeOffset = new THREE.Vector3(0, 200, -200);
-    // updates the offset with the object‘s global transformation matrix
-    let cameraOffset = relativeOffset.applyMatrix4(car.matrixWorld);
-    // updates the camera position with the new offset
-    camera.position.copy(cameraOffset);
-    // camera looks at the object’s position
-    camera.lookAt(car.position);
+        let relativeOffset = new THREE.Vector3(0, 200, -200);
+        // updates the offset with the object‘s global transformation matrix
+        let cameraOffset = relativeOffset.applyMatrix4(car.matrixWorld);
+        // updates the camera position with the new offset
+        camera.position.copy(cameraOffset);
+        // camera looks at the object’s position
+        camera.lookAt(car.position);
     }
-    
+
     renderer.render(scene, camera);
     requestAnimationFrame(render);
 }
@@ -86,16 +86,16 @@ function doKey(event) {
     let key = event.key;
     switch (key) {
         case "w":
-            pos.z--;
+            pos.z += 0.1 * Math.cos(pos.y);
             break;
         case "s":
-            pos.z++;
+            pos.z -= 0.1 * Math.cos(pos.y);
             break;
         case "a":
-            car.rotation.y += angle / 0.02;
+            car.rotation.y += 0.02;
             break;
         case "d":
-            car.rotation.y -= angle / 0.02;
+            car.rotation.y -= 0.02;
             break;
         default:
             break;
@@ -103,3 +103,7 @@ function doKey(event) {
     // renderer.render(scene, camera);
     // pos.z--;
 }
+
+function radians(degrees) {
+    return degrees * Math.PI / 180;
+};
