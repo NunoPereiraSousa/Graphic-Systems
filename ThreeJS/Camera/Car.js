@@ -109,7 +109,3 @@ function doKey(event) {
     pos.z += vel * Math.cos(pos.y);
     pos.x += vel * Math.sin(pos.y);
 }
-
-function radians(degrees) {
-    return degrees * Math.PI / 180;
-};
