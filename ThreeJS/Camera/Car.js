@@ -66,7 +66,7 @@ function render() {
         // sets the toycar object with the updated position
         car.position.set(pos.x, pos.y, pos.z);
         // rotates the car by angle radians
-        // car.rotation.y = (angle);
+        car.rotation.y = (angle);
         // camera TO object relative offset
         let relativeOffset = new THREE.Vector3(0, 200, -200);
         // updates the offset with the object‘s global transformation matrix
@@ -81,27 +81,33 @@ function render() {
     requestAnimationFrame(render);
 }
 
+let vel = 0;
+
 // key handling
 function doKey(event) {
     let key = event.key;
     switch (key) {
         case "w":
-            pos.z += 0.1 * Math.cos(pos.y);
+            if (vel <= 5) {
+                vel += 0.01;
+            }
             break;
         case "s":
-            pos.z -= 0.1 * Math.cos(pos.y);
+            if (vel >= -5) {
+                vel -= 0.01;
+            }
             break;
         case "a":
-            car.rotation.y += 0.02;
+            angle += 0.02;
             break;
         case "d":
-            car.rotation.y -= 0.02;
+            angle -= 0.02;
             break;
         default:
             break;
     }
-    // renderer.render(scene, camera);
-    // pos.z--;
+    pos.z += vel * Math.cos(pos.y);
+    pos.x += vel * Math.sin(pos.y);
 }
 
 function radians(degrees) {
