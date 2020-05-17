@@ -106,6 +106,6 @@ function doKey(event) {
         default:
             break;
     }
-    pos.z += vel * Math.cos(pos.y);
-    pos.x += vel * Math.sin(pos.y);
+    pos.z += vel * Math.cos(angle);
+    pos.x += vel * Math.sin(angle);
 }
