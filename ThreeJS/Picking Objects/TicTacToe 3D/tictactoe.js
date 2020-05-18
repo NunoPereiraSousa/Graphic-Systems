@@ -2,10 +2,15 @@ let renderer, scene, camera, mouse = {
         x: 0,
         y: 0
     },
-    raycaster = new THREE.Raycaster();
+    mouse2 = {
+        x: 0,
+        y: 0
+    }
+raycaster = new THREE.Raycaster();
 let sphere;
 
-window.addEventListener("mousemove", onMouseClick, false);
+window.addEventListener("mousemove", onMouseMove, false);
+window.addEventListener("mousedown", onMouseMove2, false);
 
 window.onload = function init() {
     //scene
@@ -58,23 +63,42 @@ function createSphere() {
     }
 }
 
-function onMouseClick(event) {
+function onMouseMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
+function onMouseMove2(event) {
+    mouse2.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse2.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
 function animate() {
-    cubesRotation();
+    ballsColorMouseMove();
+    ballsColorMouseClick();
     renderer.render(scene, camera)
     requestAnimationFrame(animate)
 }
 
-function cubesRotation() {
+function ballsColorMouseMove() {
     raycaster.setFromCamera(mouse, camera);
 
     const intersects = raycaster.intersectObjects(scene.children);
 
-    intersects.forEach(intersection => {
-        intersection.object.material.color.set(0xff0000);
-    })
+    for (var i = 0; i < intersects.length; i++) {
+        intersects[i].object.material.color.set(0xf9d71c); // yellow
+    }
+}
+
+let green = new THREE.Color("rgb(34,139,34)");
+let red = new THREE.Color("rgb(255, 0, 0)");
+
+function ballsColorMouseClick() {
+    raycaster.setFromCamera(mouse2, camera);
+
+    const intersects2 = raycaster.intersectObjects(scene.children);
+
+    for (var i = 0; i < intersects2.length; i++) {
+        intersects2[i].object.material.color.set(green);
+    }
 }
